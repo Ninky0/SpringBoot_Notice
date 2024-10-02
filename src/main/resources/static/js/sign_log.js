@@ -60,10 +60,10 @@ function submitForm() {
 
 function submitLoginForm() {
     const loginData = {
-        email: document.getElementById('login-email').value,
+        userid: document.getElementById('login-userid').value,
         password: document.getElementById('login-password').value
     };
-
+    console.log(loginData.userid, loginData.password);
     fetch('/users/login', {
         method: 'POST',
         headers: {
@@ -75,7 +75,7 @@ function submitLoginForm() {
         .then(data => {
             if (data.success) {
                 alert('로그인 성공!');
-                window.location.href = '/dashboard';  // 대시보드 페이지로 리디렉션
+                window.location.href = '/articles';
             } else {
                 alert('로그인 실패: ' + data.message);
             }

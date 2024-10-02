@@ -9,4 +9,6 @@ public interface UserMapper {
     User joinedUserByEmail(String email);
     User joinedUserByPhone(String phone);
     User validId(String userid);
+    User findById(Long id);
+    User findByUserId(String userid);
 }

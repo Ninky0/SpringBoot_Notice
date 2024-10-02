@@ -2,6 +2,7 @@ package org.example.springboot_notice.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.springboot_notice.domain.User;
+import org.example.springboot_notice.dto.MemberResponseDTO;
 import org.example.springboot_notice.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,17 @@ public class UserService {
             return true;
         }
         return false;
+    }
+
+    public MemberResponseDTO findById(Long id) {
+        return userMapper.findById(id)
+                .toMemberResponseDTO();
+    }
+
+    public MemberResponseDTO findByUserId(String userid) {
+     return userMapper.findByUserId(userid)
+             .toMemberResponseDTO();
+
     }
 
 }
