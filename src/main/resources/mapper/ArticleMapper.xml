@@ -17,4 +17,8 @@
         INSERT INTO article(title,content,author,createTime) VALUES (#{title},#{content},#{author},#{createTime});
     </insert>
 
+    <delete id="deleteArticle" parameterType="String">
+        DELETE FROM article WHERE userid=#{userid};
+    </delete>
+
 </mapper>

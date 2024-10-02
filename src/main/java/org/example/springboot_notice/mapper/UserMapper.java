@@ -11,4 +11,5 @@ public interface UserMapper {
     User validId(String userid);
     User findById(Long id);
     User findByUserId(String userid);
+    void deleteUser(User user);
 }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 탈퇴</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user_delete.css}">
+</head>
+<body>
+<div class="container">
+    <h2>회원 탈퇴</h2>
+    <form th:action="@{/delete-account}" method="post">
+        <div class="form-group">
+            <label for="userid">사용자 ID:</label>
+            <input th:value="${user.userid}" type="text" class="input" id="userid" readonly/>
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호:</label>
+            <input type="password" class="input" placeholder="비밀번호를 입력하세요" id="password" name="password" required/>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" onclick="submitForm()">탈퇴하기</button>
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='/articles'">취소</button>
+        </div>
+    </form>
+</div>
+<script src="/js/user_delete.js"></script>
+</body>
+</html>

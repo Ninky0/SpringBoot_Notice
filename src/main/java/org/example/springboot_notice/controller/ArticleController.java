@@ -6,7 +6,6 @@ import org.example.springboot_notice.domain.Article;
 import org.example.springboot_notice.dto.ArticleCreateRequestDTO;
 import org.example.springboot_notice.dto.ArticleResponseDTO;
 import org.example.springboot_notice.service.ArticleService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

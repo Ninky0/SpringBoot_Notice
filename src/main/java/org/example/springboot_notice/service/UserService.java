@@ -32,6 +32,18 @@ public class UserService {
         return false;
     }
 
+    public void deleteUser(User user) {
+        userMapper.deleteUser(user);
+    }
+
+    public boolean checkValidation(String userid, String password) {
+        User user = userMapper.findByUserId(userid);
+        if (user.getPassword().equals(password)) {
+            return true;
+        }
+        return false;
+    }
+
     public MemberResponseDTO findById(Long id) {
         return userMapper.findById(id)
                 .toMemberResponseDTO();
