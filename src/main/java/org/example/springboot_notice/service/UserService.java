@@ -17,7 +17,7 @@ public class UserService {
     public Boolean joinedUser(User user) {
         User member = userMapper.joinedUserByEmail(user.getEmail());
         User member2 = userMapper.joinedUserByPhone(user.getPhone());
-        if(member!=null && member2!=null){
+        if(member!=null || member2!=null){
             return true;
         }
         return false;
