@@ -12,8 +12,11 @@
                 <li class="nav-item active">
                     <a class="nav-link" th:href="@{/articles}">글 목록</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/users/login}">회원가입/로그인</a>
+                <li class="nav-item" th:if="${session.userid == null}">
+                    <a class="nav-link" th:href="@{/users}">회원가입/로그인</a>
+                </li>
+                <li class="nav-item" th:if="${session.userid != null}">
+                    <a class="nav-link" th:href="@{/users/logout}">로그아웃</a>
                 </li>
             </ul>
         </div>

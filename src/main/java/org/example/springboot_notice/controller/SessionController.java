@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Map;
 
@@ -44,9 +45,8 @@ public class SessionController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity<?> logout(HttpSession session) {
-        session.invalidate(); // 세션의 모든 속성 제거
-        // 로그아웃 성공 응답, 리다이렉트 URL 포함
-        return ResponseEntity.ok(Map.of("success", true, "redirectUrl", "/users"));
+    public RedirectView logout(HttpSession session) {
+        session.invalidate();
+        return new RedirectView("/users"); // 직접적인 리다이렉트
     }
 }

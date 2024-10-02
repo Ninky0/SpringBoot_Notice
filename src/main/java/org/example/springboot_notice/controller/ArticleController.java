@@ -3,6 +3,7 @@ package org.example.springboot_notice.controller;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.example.springboot_notice.domain.Article;
+import org.example.springboot_notice.dto.ArticleCreateRequestDTO;
 import org.example.springboot_notice.dto.ArticleResponseDTO;
 import org.example.springboot_notice.service.ArticleService;
 import org.springframework.http.HttpStatus;
@@ -40,11 +41,16 @@ public class ArticleController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> saveArticle(@RequestBody Article article, HttpSession session) {
+    public ResponseEntity<?> saveArticle(@RequestBody ArticleCreateRequestDTO request, HttpSession session) {
+        Article article = request.toArticle();
+
         String userid = (String) session.getAttribute("userid");
-        System.out.println(userid);
-        article.setAuthor(userid); // Article 객체에 userID 설정
+
+        // System.out.println(userid);
+
+        article.setAuthor(userid); // Article 객체에 userid 설정
         article.setCreateTime(new Date()); // 생성 시간 설정
+
         articleService.saveArticle(article);
 
         return ResponseEntity.ok("글이 성공적으로 등록되었습니다.");
