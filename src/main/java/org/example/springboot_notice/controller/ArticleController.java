@@ -1,14 +1,18 @@
 package org.example.springboot_notice.controller;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.example.springboot_notice.domain.Article;
 import org.example.springboot_notice.dto.ArticleResponseDTO;
 import org.example.springboot_notice.service.ArticleService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -25,8 +29,25 @@ public class ArticleController {
     }
 
     @GetMapping("/register")
-    public String registerForm(Model model) {
+    public String registerForm(HttpSession session, RedirectAttributes redirectAttributes) {
+        String userid = (String) session.getAttribute("userid");
+        System.out.println(userid);
+        if (userid == null) {
+            redirectAttributes.addFlashAttribute("message", "로그인이 필요합니다.");
+            return "redirect:/users";
+        }
         return "create_article";
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> saveArticle(@RequestBody Article article, HttpSession session) {
+        String userid = (String) session.getAttribute("userid");
+        System.out.println(userid);
+        article.setAuthor(userid); // Article 객체에 userID 설정
+        article.setCreateTime(new Date()); // 생성 시간 설정
+        articleService.saveArticle(article);
+
+        return ResponseEntity.ok("글이 성공적으로 등록되었습니다.");
     }
 
     @GetMapping("/detail/{id}")

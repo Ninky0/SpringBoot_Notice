@@ -13,5 +13,8 @@
         SELECT * FROM article WHERE id = #{id};
     </select>
 
+    <insert id="saveArticle" parameterType="org.example.springboot_notice.domain.Article">
+        INSERT INTO article(title,content,author,createTime,user_id) VALUES (#{title},#{content},#{author},#{createTime},);
+    </insert>
 
 </mapper>

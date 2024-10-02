@@ -26,4 +26,8 @@ public class ArticleService {
         return articleMapper.findById(id)
                 .toArticleResponseDTO();
     }
+
+    public void saveArticle(Article article){
+        articleMapper.saveArticle(article);
+    }
 }

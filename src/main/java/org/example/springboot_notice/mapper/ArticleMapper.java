@@ -9,4 +9,5 @@ import java.util.List;
 public interface ArticleMapper {
     List<Article> findAll();
     Article findById(Long id);
+    void saveArticle(Article article);
 }
