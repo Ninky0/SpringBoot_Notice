@@ -9,6 +9,9 @@
         SELECT * FROM article;
     </select>
 
+    <select id="findById" resultType="org.example.springboot_notice.domain.Article">
+        SELECT * FROM article WHERE id = #{id};
+    </select>
 
 
 </mapper>

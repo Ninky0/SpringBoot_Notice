@@ -31,7 +31,8 @@ public class ArticleController {
 
     @GetMapping("/detail/{id}")
     public String viewDetailById(@PathVariable("id") Long id, Model model) {
-
+        ArticleResponseDTO article = articleService.findById(id);
+        model.addAttribute("article", article);
         return "article_detail";
     }
 
