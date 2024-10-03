@@ -18,7 +18,7 @@
     </select>
 
     <delete id="deleteUser" parameterType="org.example.springboot_notice.domain.User">
-        DELETE FROM user WHERE id = #{id};
+        DELETE FROM user WHERE userid = #{userid};
     </delete>
 
     <select id="joinedUserByEmail" parameterType="String" resultType="org.example.springboot_notice.domain.User">

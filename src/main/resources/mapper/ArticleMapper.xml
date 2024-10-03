@@ -18,7 +18,7 @@
     </insert>
 
     <delete id="deleteArticle" parameterType="String">
-        DELETE FROM article WHERE userid=#{userid};
+        DELETE FROM article WHERE author=#{userid};
     </delete>
 
 </mapper>

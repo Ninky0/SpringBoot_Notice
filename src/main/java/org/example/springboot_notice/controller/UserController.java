@@ -11,6 +11,7 @@ import org.example.springboot_notice.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,23 +51,32 @@ public class UserController {
         return "user_delete";
     }
 
+    @Transactional
     @DeleteMapping("/quit")
-    public ResponseEntity<String> deleteUser( @RequestBody MemberDeleteRequestDTO request, HttpSession session) {
-        boolean checkValidation = userService.checkValidation(request.getUserid(), request.getPassword());
+    public ResponseEntity<String> deleteUser(@RequestBody MemberDeleteRequestDTO request, HttpSession session) {
+        String userid = (String) session.getAttribute("userid");
 
+        // 사용자 존재 여부 확인
+        MemberResponseDTO user = userService.findByUserId(userid);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("사용자 정보가 없습니다.");
+        }
+
+        // 비밀번호 검증
+        boolean checkValidation = userService.checkValidation(request.getUserid(), request.getPassword());
         if (!checkValidation) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("입력된 정보가 일치하지 않습니다.");
         }
 
-        String userid = (String) session.getAttribute("userid");
-
+        // 사용자 및 관련 정보 삭제
         articleService.deleteArticle(userid);
         userService.deleteUser(request.toUser());
-
         session.invalidate();
 
         return ResponseEntity.ok("탈퇴 완료 및 작성했던 글을 모두 삭제하였습니다.");
     }
+
 
 }
