@@ -22,11 +22,15 @@
                 <span th:text="${#dates.format(article.updateTime, 'yyyy-MM-dd HH:mm')}">수정일</span>
             </p>
         </div>
-        <div class="card-footer">
+        <div class="card-footer" th:if="${session.userid != null and session.userid == article.author}">
             <a th:href="@{/articles/update/{id}(id=${article.id})}" class="btn btn-primary">수정</a>
             <a th:href="@{/articles/delete/{id}(id=${article.id})}" class="btn btn-danger">삭제</a>
         </div>
     </div>
+    <div th:if="${session.userid == null}">
+        <p>더 많은 기능을 사용하려면 <a href="/users">로그인</a> 해주세요.</p>
+    </div>
+
 </div>
 
 <!-- Optional JavaScript; Bootstrap JS 및 의존성 추가 -->
