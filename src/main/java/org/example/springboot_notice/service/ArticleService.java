@@ -35,6 +35,10 @@ public class ArticleService {
         articleMapper.updateArticle(article);
     }
 
+    public void deleteArticle(Long id){
+        articleMapper.deleteArticle(id);
+    }
+
     public void deleteAllArticle(String userid){
         articleMapper.deleteAllArticle(userid);
     }

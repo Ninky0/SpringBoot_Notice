@@ -11,5 +11,6 @@ public interface ArticleMapper {
     Article findById(Long id);
     void saveArticle(Article article);
     void updateArticle(Article article);
+    void deleteArticle(Long id);
     void deleteAllArticle(String userid);
 }

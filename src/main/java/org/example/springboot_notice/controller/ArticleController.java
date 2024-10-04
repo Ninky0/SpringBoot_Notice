@@ -3,9 +3,11 @@ package org.example.springboot_notice.controller;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.example.springboot_notice.domain.Article;
-import org.example.springboot_notice.dto.ArticleCreateRequestDTO;
-import org.example.springboot_notice.dto.ArticleResponseDTO;
+import org.example.springboot_notice.domain.User;
+import org.example.springboot_notice.dto.*;
 import org.example.springboot_notice.service.ArticleService;
+import org.example.springboot_notice.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,7 @@ import java.util.List;
 @RequestMapping("/articles")
 public class ArticleController {
     private final ArticleService articleService;
+    private final UserService userService;
 
     @GetMapping
     public String findAllArticle(Model model) {
@@ -70,7 +73,7 @@ public class ArticleController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateArticle(@PathVariable("id") Long id, @RequestBody ArticleCreateRequestDTO request) {
+    public ResponseEntity<?> updateArticle(@PathVariable("id") Long id, @RequestBody ArticleUpdateRequestDTO request) {
         Article article = request.toArticle();
         article.setId(id);
         article.setUpdateTime(new Date());
@@ -85,9 +88,24 @@ public class ArticleController {
         return "erase_article";
     }
 
-    @DeleteMapping("/erase")
-    public ResponseEntity<?> deleteArticle(@RequestParam("id") Long id, HttpSession session) {
-        String userid = (String) session.getAttribute("userid");
+    @DeleteMapping("/erase/{id}")
+    public ResponseEntity<String> deleteArticle(@PathVariable("id") Long id, @RequestBody ArticleDeteleRequestDTO request, HttpSession session) {
+
+        // 사용자 존재 여부 확인
+        MemberResponseDTO user = userService.findByUserId(request.getUserid());
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("사용자 정보가 없습니다.");
+        }
+
+        // 비밀번호 검증
+        boolean checkValidation = userService.checkValidation(request.getUserid(), request.getPassword());
+        if (!checkValidation) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"message\":\"입력된 정보가 일치하지 않습니다.\"}");
+        }
+
+        articleService.deleteArticle(id);
         return ResponseEntity.ok("삭제 완료");
     }
 }

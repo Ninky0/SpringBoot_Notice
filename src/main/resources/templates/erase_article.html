@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>글 삭제</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user_delete.css}">
+</head>
+<body>
+<form id="deleteForm">
+    <input th:value="${article.id}" type="hidden" id="id" name="id"/>
+    <div class="container">
+        <h2>글 삭제</h2>
+
+        <div class="form-group">
+            <label for="userid">사용자 ID:</label>
+            <input th:value="${article.author}" type="text" class="input" id="userid" readonly/>
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호:</label>
+            <input type="password" class="input" placeholder="비밀번호를 입력하세요" id="password" name="password" required/>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">삭제하기</button> <!-- onclick 제거 -->
+            <button type="button" class="btn btn-secondary" th:onclick="'window.location.href=\'/articles/detail/' + ${article.id} + '\''">취소</button>
+        </div>
+
+    </div>
+</form>
+<script src="/js/erase_article.js"></script>
+</body>
+</html>

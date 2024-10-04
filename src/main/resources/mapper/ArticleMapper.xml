@@ -21,6 +21,10 @@
         UPDATE article SET title = #{title}, content = #{content}, updateTime = #{updateTime} WHERE id = #{id};
     </update>
 
+    <delete id="deleteArticle" parameterType="long">
+        DELETE FROM article WHERE id=#{id};
+    </delete>
+
     <delete id="deleteAllArticle" parameterType="String">
         DELETE FROM article WHERE author=#{userid};
     </delete>

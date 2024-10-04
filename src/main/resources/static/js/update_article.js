@@ -7,7 +7,7 @@ function submitUpdateForm(event) {
         content: document.getElementById('content').value,
     };
 
-    fetch('/articles/update/'+formData.id, {
+    fetch(`/articles/update/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
