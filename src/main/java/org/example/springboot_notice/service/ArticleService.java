@@ -42,4 +42,11 @@ public class ArticleService {
     public void deleteAllArticle(String userid){
         articleMapper.deleteAllArticle(userid);
     }
+
+    public List<ArticleResponseDTO> searchArticle(String keyword){
+        List<Article> articles = articleMapper.searchArticle(keyword);
+        return articles.stream()
+                .map(Article::toArticleResponseDTO)
+                .collect(Collectors.toList());
+    }
 }

@@ -13,4 +13,5 @@ public interface ArticleMapper {
     void updateArticle(Article article);
     void deleteArticle(Long id);
     void deleteAllArticle(String userid);
+    List<Article> searchArticle(String keyword);
 }

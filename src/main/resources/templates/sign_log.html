@@ -5,6 +5,14 @@
     <link rel="stylesheet" href="/css/sign_log.css">
 </head>
 <body>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var message = [[${message}]];
+    if (message) {
+        alert(message);
+    }
+    /*]]>*/
+</script>
 <div class="form-structor">
     <div class="signup">
         <h2 class="form-title" id="signup"><span>or</span>Sign up</h2>

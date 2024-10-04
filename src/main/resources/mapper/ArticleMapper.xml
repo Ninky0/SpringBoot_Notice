@@ -9,6 +9,13 @@
         SELECT * FROM article;
     </select>
 
+    <select id="searchArticle" parameterType="String" resultType="org.example.springboot_notice.domain.Article">
+        SELECT * FROM article
+        WHERE author LIKE CONCAT('%', #{keyword}, '%')
+           OR content LIKE CONCAT('%', #{keyword}, '%')
+           OR title LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
     <select id="findById" resultType="org.example.springboot_notice.domain.Article">
         SELECT * FROM article WHERE id = #{id};
     </select>

@@ -98,7 +98,7 @@ public class ArticleController {
                     .body("사용자 정보가 없습니다.");
         }
 
-        // 비밀번호 검증
+        // 비밀번호 검증[
         boolean checkValidation = userService.checkValidation(request.getUserid(), request.getPassword());
         if (!checkValidation) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -107,5 +107,16 @@ public class ArticleController {
 
         articleService.deleteArticle(id);
         return ResponseEntity.ok("삭제 완료");
+    }
+
+    @GetMapping("/search")
+    public String searchArticles(@RequestParam String keyword, Model model, RedirectAttributes redirectAttributes) {
+        List<ArticleResponseDTO> searchResults = articleService.searchArticle(keyword);
+        if (searchResults.isEmpty()) {
+            redirectAttributes.addFlashAttribute("noResultsAlert", "검색 결과가 없습니다.");
+            return "redirect:/articles";
+        }
+        model.addAttribute("articles", searchResults);
+        return "article_list";
     }
 }
