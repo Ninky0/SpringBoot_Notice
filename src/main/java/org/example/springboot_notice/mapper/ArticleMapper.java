@@ -10,5 +10,6 @@ public interface ArticleMapper {
     List<Article> findAll();
     Article findById(Long id);
     void saveArticle(Article article);
-    void deleteArticle(String userid);
+    void updateArticle(Article article);
+    void deleteAllArticle(String userid);
 }

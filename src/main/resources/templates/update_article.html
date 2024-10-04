@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Article</title>
+    <title>Update Article</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body class="container mt-5">
+<input th:value="${article.id}" type="hidden" id="id" name="id"/>
 <h2>글 수정하기</h2>
 <form id="articleForm" onsubmit="submitUpdateForm(event)">
     <div class="form-group">

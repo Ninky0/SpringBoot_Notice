@@ -71,7 +71,7 @@ public class UserController {
         }
 
         // 사용자 및 관련 정보 삭제
-        articleService.deleteArticle(userid);
+        articleService.deleteAllArticle(userid);
         userService.deleteUser(request.toUser());
         session.invalidate();
 

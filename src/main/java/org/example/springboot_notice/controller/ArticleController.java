@@ -62,4 +62,32 @@ public class ArticleController {
         return "article_detail";
     }
 
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable("id") Long id, Model model) {
+        ArticleResponseDTO article = articleService.findById(id);
+        model.addAttribute("article", article);
+        return "update_article";
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateArticle(@PathVariable("id") Long id, @RequestBody ArticleCreateRequestDTO request) {
+        Article article = request.toArticle();
+        article.setId(id);
+        article.setUpdateTime(new Date());
+        articleService.updateArticle(article);
+        return ResponseEntity.ok("글 수정 완료");
+    }
+
+    @GetMapping("/erase/{id}")
+    public String eraseForm(@PathVariable("id") Long id, Model model) {
+        ArticleResponseDTO article = articleService.findById(id);
+        model.addAttribute("article", article);
+        return "erase_article";
+    }
+
+    @DeleteMapping("/erase")
+    public ResponseEntity<?> deleteArticle(@RequestParam("id") Long id, HttpSession session) {
+        String userid = (String) session.getAttribute("userid");
+        return ResponseEntity.ok("삭제 완료");
+    }
 }

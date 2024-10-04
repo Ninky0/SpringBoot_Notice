@@ -31,7 +31,11 @@ public class ArticleService {
         articleMapper.saveArticle(article);
     }
 
-    public void deleteArticle(String userid){
-        articleMapper.deleteArticle(userid);
+    public void updateArticle(Article article){
+        articleMapper.updateArticle(article);
+    }
+
+    public void deleteAllArticle(String userid){
+        articleMapper.deleteAllArticle(userid);
     }
 }

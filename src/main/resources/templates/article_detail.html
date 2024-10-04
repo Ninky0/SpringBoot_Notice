@@ -24,7 +24,7 @@
         </div>
         <div class="card-footer" th:if="${session.userid != null and session.userid == article.author}">
             <a th:href="@{/articles/update/{id}(id=${article.id})}" class="btn btn-primary">수정</a>
-            <a th:href="@{/articles/delete/{id}(id=${article.id})}" class="btn btn-danger">삭제</a>
+            <a th:href="@{/articles/erase/{id}(id=${article.id})}" class="btn btn-danger">삭제</a>
         </div>
     </div>
     <div th:if="${session.userid == null}">

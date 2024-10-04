@@ -17,7 +17,11 @@
         INSERT INTO article(title,content,author,createTime) VALUES (#{title},#{content},#{author},#{createTime});
     </insert>
 
-    <delete id="deleteArticle" parameterType="String">
+    <update id="updateArticle" parameterType="org.example.springboot_notice.domain.Article">
+        UPDATE article SET title = #{title}, content = #{content}, updateTime = #{updateTime} WHERE id = #{id};
+    </update>
+
+    <delete id="deleteAllArticle" parameterType="String">
         DELETE FROM article WHERE author=#{userid};
     </delete>
 
