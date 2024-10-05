@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Information</title>
+    <script>
+        function getWeather() {
+            var xhr = new XMLHttpRequest();
+            var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst';
+
+            var now = new Date();
+            var baseDate = now.toISOString().split('T')[0].replace(/-/g, ''); // YYYYMMDD 형식으로 날짜를 가져옵니다.
+            var baseTime = (now.getHours() < 10 ? '0' : '') + now.getHours() + '00'; // 가장 가까운 정시로 시간을 가져옵니다.
+
+            var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + 'f3EBxGArPSLcuA%2FhMpozbP7r5qSMPfyto%2BDPhoG6O3pCeMhvbje4mmGdHyDBhg3nqSaESnS3Lf44giG5C1qekw%3D%3D'; // 여기에 서비스키 입력
+            queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');
+            queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1000');
+            queryParams += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('JSON');
+            queryParams += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent(baseDate); // 동적으로 오늘 날짜
+            queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent(baseTime); // 동적으로 현재 시간
+            queryParams += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent('102'); // X 좌표
+            queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent('84'); // Y 좌표
+
+            xhr.open('GET', url + queryParams);
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var response = JSON.parse(this.responseText);
+                    var formattedResponse = "Weather status: " + response.response.header.resultMsg; // 에러 메시지를 보기 좋게 포맷팅
+                    document.getElementById('weather-text').textContent = formattedResponse;
+                }
+            };
+            xhr.send('');
+        }
+    </script>
+</head>
+<body>
+<h1>Weather Information</h1>
+<button onclick="getWeather()">Get Weather</button>
+<div id="weather-text"></div>
+</body>
+</html>
