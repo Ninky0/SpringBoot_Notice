@@ -2,7 +2,6 @@ package org.example.springboot_notice.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.example.springboot_notice.domain.User;
 import org.example.springboot_notice.dto.MemberCreateRequestDTO;
 import org.example.springboot_notice.dto.MemberDeleteRequestDTO;
 import org.example.springboot_notice.dto.MemberResponseDTO;
@@ -10,6 +9,7 @@ import org.example.springboot_notice.service.ArticleService;
 import org.example.springboot_notice.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -22,6 +22,8 @@ public class UserController {
     private final UserService userService;
     private final ArticleService articleService;
 
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @GetMapping
     public String registerForm() {
         return "sign_log";
@@ -29,17 +31,17 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<String> createUser(@RequestBody MemberCreateRequestDTO request) {
-        boolean isMember = userService.joinedUser(request.toUser());
+        boolean isMember = userService.joinedUser(request.toUser(bCryptPasswordEncoder));
         if (isMember) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 가입한 사용자입니다.");
         }
 
-        boolean isUsing = userService.validId(request.toUser());
+        boolean isUsing = userService.validId(request.toUser(bCryptPasswordEncoder));
         if (!isUsing) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("사용중인 ID입니다.");
         }
 
-        userService.createUser(request.toUser());
+        userService.createUser(request.toUser(bCryptPasswordEncoder));
         return ResponseEntity.ok("회원가입이 완료되었습니다.");
     }
 

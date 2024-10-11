@@ -2,6 +2,7 @@ package org.example.springboot_notice.dto;
 
 import lombok.Getter;
 import org.example.springboot_notice.domain.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Getter
 public class MemberCreateRequestDTO {
@@ -11,13 +12,13 @@ public class MemberCreateRequestDTO {
     private String userid;
     private String password;
 
-    public User toUser(){
+    public User toUser(BCryptPasswordEncoder bCryptPasswordEncoder){
         return User.builder()
                 .name(name)
                 .email(email)
                 .phone(phone)
                 .userid(userid)
-                .password(password)
+                .password(bCryptPasswordEncoder.encode(password))
                 .build();
     }
 }

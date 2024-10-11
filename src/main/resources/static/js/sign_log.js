@@ -1,5 +1,3 @@
-console.clear();
-
 const loginBtn = document.getElementById('login');
 const signupBtn = document.getElementById('signup');
 
@@ -60,25 +58,34 @@ function submitForm() {
 
 function submitLoginForm() {
     const loginData = {
-        userid: document.getElementById('login-userid').value,
+        username: document.getElementById('login-userid').value,
         password: document.getElementById('login-password').value
     };
-    console.log(loginData.userid, loginData.password);
+
+    console.log(loginData.username, loginData.password);
+
     fetch('/users/login', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: JSON.stringify(loginData)
+        body: new URLSearchParams(loginData).toString()
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('로그인 성공!');
-                window.location.href = '/articles';
+        .then(response => {
+            if (response.status === 200) {
+                return response.json();  // 성공 시 JSON 응답 처리
             } else {
-                alert('로그인 실패: ' + data.message);
+                return response.json().then(errorData => {
+                    throw new Error(errorData.message);  // 실패 시 에러 메시지 전달
+                });
             }
+        })
+        .then(data => {
+            alert('로그인 성공!');
+            window.location.href = data.url;  // 성공 시 리다이렉트
+        })
+        .catch(error => {
+            alert('로그인 실패: ' + error.message);  // 실패 시 메시지 표시
         })
         .catch(error => {
             console.error('Login Error:', error);

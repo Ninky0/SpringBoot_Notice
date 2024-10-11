@@ -11,3 +11,7 @@ mybatis:
 server:
   port: 8080
 
+weather:
+  api:
+    url: "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst"
+    key: "f3EBxGArPSLcuA/hMpozbP7r5qSMPfyto+DPhoG6O3pCeMhvbje4mmGdHyDBhg3nqSaESnS3Lf44giG5C1qekw=="
