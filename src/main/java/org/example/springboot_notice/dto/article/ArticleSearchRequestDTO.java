@@ -1,4 +1,4 @@
-package org.example.springboot_notice.dto;
+package org.example.springboot_notice.dto.article;
 
 import lombok.Getter;
 

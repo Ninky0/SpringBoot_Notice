@@ -2,9 +2,9 @@ package org.example.springboot_notice.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.example.springboot_notice.dto.MemberCreateRequestDTO;
-import org.example.springboot_notice.dto.MemberDeleteRequestDTO;
-import org.example.springboot_notice.dto.MemberResponseDTO;
+import org.example.springboot_notice.dto.member.MemberCreateRequestDTO;
+import org.example.springboot_notice.dto.member.MemberDeleteRequestDTO;
+import org.example.springboot_notice.dto.member.MemberResponseDTO;
 import org.example.springboot_notice.service.ArticleService;
 import org.example.springboot_notice.service.UserService;
 import org.springframework.http.HttpStatus;

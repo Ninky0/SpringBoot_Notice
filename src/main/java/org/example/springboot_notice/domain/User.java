@@ -3,7 +3,7 @@ package org.example.springboot_notice.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.example.springboot_notice.dto.MemberResponseDTO;
+import org.example.springboot_notice.dto.member.MemberResponseDTO;
 
 @Getter
 @Setter

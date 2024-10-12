@@ -2,7 +2,7 @@ package org.example.springboot_notice.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.springboot_notice.domain.User;
-import org.example.springboot_notice.dto.MemberResponseDTO;
+import org.example.springboot_notice.dto.member.MemberResponseDTO;
 import org.example.springboot_notice.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 

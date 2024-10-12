@@ -2,19 +2,10 @@ package org.example.springboot_notice.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.example.springboot_notice.domain.User;
-import org.example.springboot_notice.dto.MemberCreateRequestDTO;
-import org.example.springboot_notice.dto.MemberLoginRequestDTO;
-import org.example.springboot_notice.dto.MemberResponseDTO;
 import org.example.springboot_notice.service.UserService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.view.RedirectView;
-
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
