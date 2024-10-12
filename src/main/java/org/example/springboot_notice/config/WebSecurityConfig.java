@@ -35,7 +35,8 @@ public class WebSecurityConfig {
                                 .requestMatchers(
                                         new AntPathRequestMatcher("/users/register"),
                                         new AntPathRequestMatcher("/users/login"),
-                                        new AntPathRequestMatcher("/users")
+                                        new AntPathRequestMatcher("/users"),
+                                        new AntPathRequestMatcher("/weather/**")
                                 ).permitAll()
                                 .anyRequest().authenticated()
                 )
