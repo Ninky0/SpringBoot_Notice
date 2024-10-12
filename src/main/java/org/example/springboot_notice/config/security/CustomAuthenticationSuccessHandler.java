@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.example.springboot_notice.domain.User;
-import org.example.springboot_notice.dto.SignInResponseDTO;
+import org.example.springboot_notice.dto.member.MemberLoginResponseDTO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -33,7 +33,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json;charset=UTF-8");
 
-        SignInResponseDTO build = SignInResponseDTO.builder()
+        MemberLoginResponseDTO build = MemberLoginResponseDTO.builder()
                 .isLoggedIn(true)
                 .message("로그인 성공")
                 .url("/articles")

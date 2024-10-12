@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="navbar">
+<nav class="navbar navbar-expand navbar-dark bg-dark" th:fragment="navbar">
     <div class="container">
         <a class="navbar-brand" href="#">NoticePoj</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,6 +20,11 @@
                 </li>
                 <li class="nav-item" th:if="${session.userid != null}">
                     <a class="nav-link" th:href="@{/users/quit}">회원탈퇴</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/weather}">날씨</a>
                 </li>
             </ul>
         </div>
